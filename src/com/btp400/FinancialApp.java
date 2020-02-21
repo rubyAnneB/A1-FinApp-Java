@@ -125,8 +125,7 @@ public class FinancialApp {
 
     }
 
-
-    public static void depositMoney(Bank bank){//todo:Figure out how to access a specific instance of Account in bank to deposit into
+    public static void depositMoney(Bank bank){
         //make a copy of the bankarray
         //ask user for account num
         //deposit accordingly
@@ -182,6 +181,8 @@ public class FinancialApp {
             System.out.println("a) display all accounts with the same account name");
             System.out.println("b) display all accounts with the same final balance");
             System.out.println("c) display all accounts opened at the bank");
+            System.out.println("d) display a specific account");
+            System.out.println("x) Return to main menu");
             String option = in.nextLine();
 
             switch (option) {
@@ -189,7 +190,7 @@ public class FinancialApp {
                 case "A":
                     System.out.println("Please enter the name to search by: ");
                     String nameSearch = in.nextLine();
-                    System.out.println(Arrays.toString(bank.searchByAccountName(nameSearch))); //todo: Fix how this is outputted
+                    System.out.println(Arrays.toString(bank.searchByAccountName(nameSearch))); //todo: Fix how this is outputted-if empty print out message
                     valid = true;
                     break;
                 case "b":
@@ -203,6 +204,18 @@ public class FinancialApp {
                 case "C":
                     System.out.println(Arrays.toString(bank.getAllAccounts()));
                     valid=true;
+                    break;
+
+                case "d":
+                case"D":
+                    System.out.println("Please enter the account number:");
+                    String accNum= in.nextLine();
+                    Account displayAcc = bank.searchByAccountNumber(accNum);
+                    if(displayAcc != null){
+                        System.out.println(displayAcc);
+                    }else{
+                        System.out.println("Account not found!");
+                    }
                     break;
                 case "x":
                 case "X":
