@@ -17,6 +17,7 @@ public class GIC extends Account implements Taxable {
 	private BigDecimal m_rate;
 	private BigDecimal taxAmount = new BigDecimal("0.00"); // ???????
 	private BigDecimal intIncome = new BigDecimal("0.00");
+
 	GIC() {
 		this("", "", 0.00, 1, 0.0125);
 		

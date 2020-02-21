@@ -1,11 +1,10 @@
 package com.btp400;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import com.seneca.accounts.*;
 import com.seneca.business.*;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 
 public class FinancialApp {
 
@@ -66,11 +65,8 @@ public class FinancialApp {
                 if(chq_args.length!= 5){
                     System.out.println("Invalid input. Please follow the format shown on screen");
                 }else{
-                    //this loop takes out the spaces for all the other constructor arguments with an exception to the name
-                    for (int i = 1 ; i<chq_args.length;++i){// it would be nice to put this into a lambda
-                        chq_args[i] = chq_args[i].trim();
-                    }
-                    newAccount = new Chequing(chq_args[0],chq_args[1],Double.parseDouble(chq_args[2]),Double.parseDouble(chq_args[3]),Integer.parseInt(chq_args[4]));
+                    //this is vulnerable to type mismatch
+                    newAccount = new Chequing(chq_args[0],chq_args[1].trim(),Double.parseDouble(chq_args[2].trim()),Double.parseDouble(chq_args[3].trim()),Integer.parseInt(chq_args[4].trim())   );
                     valid_args=true;
 
                 }
@@ -127,11 +123,17 @@ public class FinancialApp {
 
     }
 
-    public static void depositMoney(){//todo:Figure out how to access a specific instance of Account in bank to deposit into
+    public static void depositMoney(Bank bank){//todo:Figure out how to access a specific instance of Account in bank to deposit into
+        //make a copy of the bankarray
+        //ask user for account num
+        //deposit accordingly
+
+
+
         System.out.println("This is the depositMoney() method");
     }
 
-    public static void withdrawMoney(){
+    public static void withdrawMoney(Bank bank){
         System.out.println("This is the withdrawMoney() method");
     }
 
@@ -197,9 +199,10 @@ public class FinancialApp {
         while (choice != 7){
             displayMenu(myBank.getBankName());
             choice=menuChoice();
+
             switch (choice){
 
-                case 1: //Open an account - Complete- add GIC
+                case 1: //Open an account - add GIC
                     if(myBank.addAccount(openAcc())){
                         System.out.println("Account successfully included");
                     }else{
@@ -211,10 +214,10 @@ public class FinancialApp {
                     closeAcc(myBank);
                     break;
                 case 3://Deposit money
-                  depositMoney();
+                  depositMoney(myBank);
                     break;
                 case 4://Withdraw money
-                    withdrawMoney();
+                    withdrawMoney(myBank);
                     break;
                 case 5://Display accounts - Formatting needs work
                     displayAccountChoice(myBank);

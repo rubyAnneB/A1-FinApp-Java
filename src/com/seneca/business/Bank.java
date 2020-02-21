@@ -78,6 +78,17 @@ public class Bank {
         return match.toArray(matchArray);
     }
 
+    public Account searchByAccountNumber (String acc_Number){
+
+        for(Account a: m_bankAccounts){
+            if(a.getAccountNumber().equals(acc_Number)){
+                return a;
+            }
+        }
+
+        return null;
+    }
+
     public Account [ ] getAllAccounts( ){
         Account[] a= new Account[m_bankAccounts.size()];
         return m_bankAccounts.toArray(a);

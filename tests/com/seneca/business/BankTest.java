@@ -99,4 +99,30 @@ public class BankTest {
 
     }
 
+    @Test
+    public void WithdrawTest(){
+        Bank myBank = new Bank();
+        myBank.addAccount(new Chequing("John Doe","1234C",123.45,0.25,3));
+        myBank.addAccount(new Chequing("Mary Ryan","5678C",678.90,0.12,3));
+
+        Account[] contents= myBank.getAllAccounts();//this is dangerous- I'm able to make a copy of a private variable that I can then modify
+
+        for(Account a: contents){
+            a.withdraw(100);
+        }
+
+        System.out.println(myBank);
+    }
+
+    @Test
+    public void SearchAccountNum(){
+        Bank myBank = new Bank();
+        myBank.addAccount(new Chequing("John Doe","1234C",123.45,0.25,3));
+        myBank.addAccount(new Chequing("Mary Ryan","5678C",678.90,0.12,3));
+
+        Account edit = myBank.searchByAccountNumber("1234C");
+        edit.withdraw(100);
+        System.out.println(myBank);
+    }
+
 }
