@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.io.*;
 
 import com.seneca.accounts.*;
-
+//todo: It would be beneficial to add a searchByAccountNumber method
 public class Bank {
     private ArrayList<Account> m_bankAccounts;
     private String m_bankName;
@@ -40,7 +40,7 @@ public class Bank {
         return m_bankAccounts.add(newAccount);
     }
 
-    public Account removeAccount(String accountNumber){
+    public Account removeAccount(String accountNumber){ //todo: Ask peter about this return type- makes better sense if it were bool no?
 
         Account m = null;
         for(Account a : m_bankAccounts){
@@ -85,7 +85,7 @@ public class Bank {
     public String toString(){
         NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-        StringBuffer out = new StringBuffer("");
+        StringBuffer out = new StringBuffer();
 
         out.append("*** Welcome to the Bank of ").append(m_bankName).append(" ***\n").append(" It has ").append(m_bankAccounts.size()).append(" accounts." );
 

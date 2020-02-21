@@ -1,5 +1,7 @@
 package com.btp400;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import com.seneca.accounts.*;
 import com.seneca.business.*;
@@ -37,9 +39,10 @@ public class FinancialApp {
         return s.nextInt();
     }
 
-    public static void displayAccount( Account account){
-
-    }
+    public static void displayAccount( Account account){//todo:What's the use of this method?
+        System.out.println("This is the details for Account number: "+account.getAccountNumber());
+        System.out.println(account);
+    }//todo: What is the use of this?
 
     public static Account openAcc(){//todo: add the option of exiting the function prematurely
         Scanner in= new Scanner(System.in);
@@ -85,11 +88,46 @@ public class FinancialApp {
 
     }
 
-    public static void closeAcc(){
-        System.out.println("This is the closeAcc() method");
+    public static void closeAcc(Bank bank){//can expand to search by name
+        Scanner in= new Scanner(System.in);
+
+        System.out.println("Please enter the Account Number: ");
+        String delAccNum= in.nextLine();
+        System.out.println("Confirm delete of account with the number: "+delAccNum+" (Y/N)"); //do I have to use StringBuffer here?
+        String res = in.nextLine();
+
+        boolean valid_res = false;
+        while(!valid_res){
+
+            switch (res){
+                case "Y":
+                case"y":
+                    Account a = bank.removeAccount(delAccNum);
+                    if(a != null){
+                        System.out.println("Account successfully deleted");
+                    }else{
+                        System.out.println("Account not found");
+                    }
+                    valid_res = true;
+                    break;
+
+                case "N":
+                case "n":
+                    valid_res=true;
+                    System.out.println("Delete cancelled");
+                    break;
+                default:
+                    System.out.println( "Invalid response, please enter \"Y\" or \"N\" ");
+
+
+            }
+
+        }
+
+
     }
 
-    public static void depositMoney(){
+    public static void depositMoney(){//todo:Figure out how to access a specific instance of Account in bank to deposit into
         System.out.println("This is the depositMoney() method");
     }
 
@@ -97,8 +135,48 @@ public class FinancialApp {
         System.out.println("This is the withdrawMoney() method");
     }
 
-    public static void displayAccountChoice(){
-        System.out.println("This is the displayAccountChoice() method");
+    public static void displayAccountChoice(Bank bank){
+        Scanner in = new Scanner(System.in);
+        boolean valid = false;
+
+        while(!valid){
+            System.out.println("Please choose one of the following options: ");
+            System.out.println("a) display all accounts with the same account name");
+            System.out.println("b) display all accounts with the same final balance");
+            System.out.println("c) display all accounts opened at the bank");
+            String option = in.nextLine();
+
+            switch (option) {
+                case "a":
+                case "A":
+                    System.out.println("Please enter the name to search by: ");
+                    String nameSearch = in.nextLine();
+                    System.out.println(Arrays.toString(bank.searchByAccountName(nameSearch))); //todo: Fix how this is outputted
+                    valid = true;
+                    break;
+                case "b":
+                case "B":
+                    System.out.println("Please enter the balance to search by: ");
+                    double balance = in.nextDouble();
+                    System.out.println(Arrays.toString(bank.searchByBalance(balance)));
+                    valid = true;
+                    break;
+                case "c":
+                case "C":
+                    System.out.println(Arrays.toString(bank.getAllAccounts()));
+                    valid=true;
+                    break;
+                case "x":
+                case "X":
+                    System.out.println("Operation cancelled, returning to main menu");
+                    valid = true;
+                    break;
+                default:
+                    System.out.println("Invalid response, enter a valid responce (a-b) or \"x\" to exit");
+                    break;
+            }
+        }
+
 
     }
 
@@ -121,7 +199,7 @@ public class FinancialApp {
             choice=menuChoice();
             switch (choice){
 
-                case 1: //Open an account
+                case 1: //Open an account - Complete- add GIC
                     if(myBank.addAccount(openAcc())){
                         System.out.println("Account successfully included");
                     }else{
@@ -129,8 +207,8 @@ public class FinancialApp {
                     }
                     break;
 
-                case 2: //Close an account
-                    closeAcc();
+                case 2: //Close an account - Complete
+                    closeAcc(myBank);
                     break;
                 case 3://Deposit money
                   depositMoney();
@@ -138,8 +216,8 @@ public class FinancialApp {
                 case 4://Withdraw money
                     withdrawMoney();
                     break;
-                case 5://Display accounts
-                    displayAccountChoice();
+                case 5://Display accounts - Formatting needs work
+                    displayAccountChoice(myBank);
                     break;
                 case 6://Display a tax statement
                     displayTax();
