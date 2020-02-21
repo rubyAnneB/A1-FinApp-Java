@@ -40,13 +40,26 @@ public class Chequing extends Account {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
 
         StringBuffer str = new StringBuffer("");
-        str.append(super.toString()).append("\nAccount Type: CHQ")
-                .append("\nService Charge: ").append(nf.format(m_serv_charge))
-                .append("\nTotal Charges:").append(nf.format(m_total_charges))
-                .append("\nList of Transactions:").append(Arrays.toString(m_trans))//todo: this is not showing the sign for positive numbers- fix this
-                .append("\nFinal Balance:").append(nf.format(getAccountBalance()));
+        str.append(super.toString())
+                .append("\nAccount Type        : CHQ")
+                .append("\nService Charge      : ").append(nf.format(m_serv_charge))
+                .append("\nTotal Charges       : ").append(nf.format(m_total_charges))
+                .append("\nList of Transactions: ").append(transationArrayString())//todo: this is not showing the sign for positive numbers- fix this
+                .append("\nFinal Balance       : ").append(nf.format(getAccountBalance()));
 
         return str.toString();
+
+    }
+
+    private String transationArrayString(){
+
+        String tranString= "";
+
+        for(BigDecimal b : m_trans){
+            tranString += (b.compareTo(BigDecimal.ZERO) > 0) ? ("+"+String.valueOf(b)+", "  ): String.valueOf(b)+", ";//todo: last comma is printing
+        }
+
+        return tranString;
 
     }
     public boolean equals(Object obj) {

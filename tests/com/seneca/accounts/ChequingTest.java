@@ -25,7 +25,7 @@ public class ChequingTest {
 
     @Test
     public void withdrawTest(){
-        Chequing a = new Chequing("John Doe","3232",100.00,2000,3);
+        Chequing a = new Chequing("John Doe","3232",100.00,0.23,3);
         System.out.println(a);
         a.withdraw(1);
         System.out.println(a);

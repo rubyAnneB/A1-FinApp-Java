@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.io.*;
 
 import com.seneca.accounts.*;
-//todo: It would be beneficial to add a searchByAccountNumber method
 public class Bank {
     private ArrayList<Account> m_bankAccounts;
     private String m_bankName;
