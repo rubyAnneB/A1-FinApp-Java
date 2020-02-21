@@ -12,7 +12,9 @@ public class FinancialApp {
     public static void loadBank( Bank bank ){
         bank.addAccount(new Chequing("John Doe","1234C",123.45,0.25,3));
         bank.addAccount(new Chequing("Mary Ryan","5678C",678.90,0.12,3));
-        //todo:Add GIC accounts
+        //	GIC(String name, String acctnum, double principal, int period, double rate) {
+        bank.addAccount(new GIC("John Doe","9999G",6000,2,.0150));
+        bank.addAccount(new GIC("Mary Ryan","888G",15000,4,.0250));
     }
     public static void displayMenu( String bankName ){
         StringBuffer title = new StringBuffer("\nWelcome to").append(bankName).append(" Bank!");
@@ -126,9 +128,7 @@ public class FinancialApp {
     }
 
     public static void depositMoney(Bank bank){
-        //make a copy of the bankarray
-        //ask user for account num
-        //deposit accordingly
+
         Scanner in  = new Scanner(System.in);
 
         System.out.println("Please enter your account number: ");
@@ -231,9 +231,14 @@ public class FinancialApp {
 
     }
 
-    public static void displayTax(){
-        System.out.println("This is the displayTax() method");
+    public static void displayTax(Account[] accounts){
+        for(Account a: accounts){
 
+            if(a instanceof Taxable){
+                System.out.println(((Taxable) a).createTaxStatement());//todo:Formatting for this is all wrong:( function doesn't print int the same way
+                //specs for this menu choice !compatible with those for GIC
+            }
+        }
     }
 
 
@@ -272,7 +277,7 @@ public class FinancialApp {
                     displayAccountChoice(myBank);
                     break;
                 case 6://Display a tax statement
-                    displayTax();
+                    displayTax(myBank.getAllAccounts());
                     break;
                 case 7://Exit
                     break;

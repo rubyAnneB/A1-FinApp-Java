@@ -18,12 +18,12 @@ public class GIC extends Account implements Taxable {
 	private BigDecimal taxAmount = new BigDecimal("0.00"); // ???????
 	private BigDecimal intIncome = new BigDecimal("0.00");
 
-	GIC() {
+	public GIC() {
 		this("", "", 0.00, 1, 0.0125);
 		
 	}
 
-	GIC(String name, String acctnum, double principal, int period, double rate) {
+	public GIC(String name, String acctnum, double principal, int period, double rate) {
 		super(name, acctnum, principal);
 		m_period = period;
 		m_rate = BigDecimal.valueOf(rate);
