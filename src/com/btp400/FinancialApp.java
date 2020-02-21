@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import com.seneca.accounts.*;
 import com.seneca.business.*;
+import javafx.scene.SnapshotParameters;
 
 
 public class FinancialApp {
@@ -92,6 +93,7 @@ public class FinancialApp {
         System.out.println("Confirm delete of account with the number: "+delAccNum+" (Y/N)"); //do I have to use StringBuffer here?
         String res = in.nextLine();
 
+
         boolean valid_res = false;
         while(!valid_res){
 
@@ -123,18 +125,52 @@ public class FinancialApp {
 
     }
 
+
     public static void depositMoney(Bank bank){//todo:Figure out how to access a specific instance of Account in bank to deposit into
         //make a copy of the bankarray
         //ask user for account num
         //deposit accordingly
+        Scanner in  = new Scanner(System.in);
+
+        System.out.println("Please enter your account number: ");
+        String account_num = in.nextLine();
+        Account depAcc = bank.searchByAccountNumber(account_num);
+
+        if(depAcc!= null){
+            System.out.println("Please enter the amount you would like to deposit:");
+            double depositMoney = in.nextDouble();
+            depAcc.deposit(depositMoney);
+
+        }else{
+            System.out.println("Error account not found.");
+        }
 
 
-
-        System.out.println("This is the depositMoney() method");
     }
 
     public static void withdrawMoney(Bank bank){
-        System.out.println("This is the withdrawMoney() method");
+        Scanner in  = new Scanner(System.in);
+
+        System.out.println("Please enter your account number: ");
+        String account_num = in.nextLine();
+        Account depAcc = bank.searchByAccountNumber(account_num);
+
+        if(depAcc != null){
+            System.out.println("Please enter the amount you would like to withdraw");
+            double withdrawAmount = in.nextDouble();
+
+            if(depAcc.withdraw(withdrawAmount)){
+                System.out.println("Withdraw successfull");
+            }else{
+                System.out.println("Withdraw failed");
+            }
+
+
+        }else{
+            System.out.println("Error account not found.");
+        }
+
+
     }
 
     public static void displayAccountChoice(Bank bank){
@@ -213,10 +249,10 @@ public class FinancialApp {
                 case 2: //Close an account - Complete
                     closeAcc(myBank);
                     break;
-                case 3://Deposit money
+                case 3://Deposit money-Complete
                   depositMoney(myBank);
                     break;
-                case 4://Withdraw money
+                case 4://Withdraw money-Complete
                     withdrawMoney(myBank);
                     break;
                 case 5://Display accounts - Formatting needs work
