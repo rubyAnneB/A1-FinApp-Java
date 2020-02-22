@@ -97,9 +97,21 @@ public class FinancialApp {
 
             }else if (acc_type.equals("GIC")|| acc_type.equals("gic")){
                 System.out.println("This is GIC account type input");
+                System.out.println("Format: Name; Account Number; Starting Balance;\nPeriod of Investment in year(s); Interest Rate (15.5% would be 15.5)");
+                System.out.println("(e.g. John M. Doe;A1234;1000.00; 1; 15.5");
+                System.out.print(">");
+                String gic_valuesString = in.nextLine();
+                String[] gic_args = gic_valuesString.split(";");
+
+                if (gic_args.length != 5) {
+                    System.out.println("Invalid input. Please follow the format shown on screen.");
+                } else {
+                    newAccount = new GIC(gic_args[0], gic_args[1].trim(), Double.parseDouble(gic_args[2].trim()), Integer.parseInt(gic_args[3].trim()),
+                            (Double.parseDouble(gic_args[4].trim())/100.00));
+                }
                 valid_args = true;
             }else{
-                System.out.println("invalid account type");
+                System.out.println("Invalid account type");
             }
         }
 
