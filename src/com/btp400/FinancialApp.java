@@ -51,7 +51,7 @@ public class FinancialApp {
      */
     public static int menuChoice( ){
         Scanner s = new Scanner(System.in);
-        System.out.println("Please enter your choice> ");
+        System.out.print("Please enter your choice> ");
         return s.nextInt();
     }
 
