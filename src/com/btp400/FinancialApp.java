@@ -74,7 +74,7 @@ public class FinancialApp {
         boolean valid_args = false;
 
         while(!valid_args){
-            System.out.println("Please enter the account type(CHQ/GIC)> ");
+            System.out.print("Please enter the account type(CHQ/GIC)> ");
             String acc_type = in.nextLine();
 
             System.out.println("Please enter account information at one line");
