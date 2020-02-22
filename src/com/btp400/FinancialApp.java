@@ -12,7 +12,6 @@ public class FinancialApp {
     public static void loadBank( Bank bank ){
         bank.addAccount(new Chequing("John Doe","1234C",123.45,0.25,3));
         bank.addAccount(new Chequing("Mary Ryan","5678C",678.90,0.12,3));
-        //	GIC(String name, String acctnum, double principal, int period, double rate) {
         bank.addAccount(new GIC("John Doe","9999G",6000,2,.0150));
         bank.addAccount(new GIC("Mary Ryan","888G",15000,4,.0250));
     }
@@ -203,7 +202,7 @@ public class FinancialApp {
                 case "c":
                 case "C":
                     System.out.println(Arrays.toString(bank.getAllAccounts()));
-                    valid=true;
+                    valid = true;
                     break;
 
                 case "d":

@@ -1,18 +1,19 @@
-/*
-* BTP400-Lab2
-* @author Ruby Anne Bautista
-* @version 1.0
-* @since 2020/01/20
-* */
-
 package com.seneca.business;
 import java.math.BigDecimal;
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.*;
-
 import com.seneca.accounts.*;
+
+/**
+ * This class manages an ArrayList of accounts and provides
+ * methods such as searching through the array through a
+ * variety of ways
+ * @author Ruby Anne Bautista
+ * @version 1.0
+ * @since 2020/01/20
+ */
 public class Bank {
     private ArrayList<Account> m_bankAccounts;
     private String m_bankName;
@@ -23,7 +24,7 @@ public class Bank {
 
     public Bank(String name){
         m_bankName=name;
-        m_bankAccounts=new ArrayList<Account>(0);
+        m_bankAccounts= new ArrayList<>(0);
     }
 
     public String getBankName(){return m_bankName;}
@@ -53,7 +54,7 @@ public class Bank {
 
     public Account[] searchByBalance(double balance){ //@returns an ArrayList<Account> containing any accounts with the same balance as the passed parameter
 
-        ArrayList<Account> matches = new ArrayList<Account>(0);
+        ArrayList<Account> matches = new ArrayList<>(0);
         for(Account acc: m_bankAccounts){
             if(acc.getAccountBalance().compareTo(BigDecimal.valueOf(balance)) == 0){
                 matches.add(acc);
