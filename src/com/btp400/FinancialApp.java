@@ -4,17 +4,27 @@ import java.util.Arrays;
 import java.util.Scanner;
 import com.seneca.accounts.*;
 import com.seneca.business.*;
-import javafx.scene.SnapshotParameters;
 
 
+/**
+ * This class prints out the menu and outputs the messages in accordance to the user's input
+ */
 public class FinancialApp {
 
+    /**
+     * @param bank the bank that the accounts are added to
+     */
     public static void loadBank( Bank bank ){
         bank.addAccount(new Chequing("John Doe","1234C",123.45,0.25,3));
         bank.addAccount(new Chequing("Mary Ryan","5678C",678.90,0.12,3));
         bank.addAccount(new GIC("John Doe","9999G",6000,2,.0150));
         bank.addAccount(new GIC("Mary Ryan","888G",15000,4,.0250));
     }
+
+    /**
+     *
+     * @param bankName The bank's name to be displayed on the menu
+     */
     public static void displayMenu( String bankName ){
         StringBuffer title = new StringBuffer("\nWelcome to").append(bankName).append(" Bank!");
         StringBuffer choice1 = new StringBuffer("1. Open an account.");
@@ -34,18 +44,30 @@ public class FinancialApp {
         System.out.println(choice6);
         System.out.println(choice7);
     }
+
+    /**
+     *Takes in an int from user's input
+     * @return the user's menu choice
+     */
     public static int menuChoice( ){
         Scanner s = new Scanner(System.in);
         System.out.println("Please enter your choice> ");
         return s.nextInt();
     }
 
-    public static void displayAccount( Account account){//todo:What's the use of this method?
-        System.out.println("This is the details for Account number: "+account.getAccountNumber());
+    /**
+     *
+     * @param account Account to be printed out
+     */
+    public static void displayAccount( Account account){
         System.out.println(account);
-    }//todo: What is the use of this?
+    }
 
-    public static Account openAcc(){//todo: add the option of exiting the function prematurely
+    /**
+     * Creates an account based on what the user inputs. Different account choices: Chequing and GIC
+     * @return An account built from the user's input.
+     */
+    public static Account openAcc(){
         Scanner in= new Scanner(System.in);
         Account newAccount = null;
 
@@ -73,7 +95,7 @@ public class FinancialApp {
 
                 }
 
-            }else if (acc_type.equals("GIC")|| acc_type.equals("gic")){//todo:Include the creation of GIC accounts
+            }else if (acc_type.equals("GIC")|| acc_type.equals("gic")){
                 System.out.println("This is GIC account type input");
                 valid_args = true;
             }else{
@@ -86,6 +108,10 @@ public class FinancialApp {
 
     }
 
+    /**
+     * Asks user for account number and closes account if found
+     * @param bank The bank from which the account will be deleted.
+     */
     public static void closeAcc(Bank bank){//can expand to search by name
         Scanner in= new Scanner(System.in);
 
@@ -126,6 +152,10 @@ public class FinancialApp {
 
     }
 
+    /**
+     * Asks user for account number of the account to be deposited into
+     * @param bank The bank the account to be deposited into belongs to
+     */
     public static void depositMoney(Bank bank){
 
         Scanner in  = new Scanner(System.in);
@@ -146,6 +176,10 @@ public class FinancialApp {
 
     }
 
+    /**
+     * Asks user for account number of the account to be withdrawn from
+     * @param bank the bank that the account to be withdrawn from belongs to
+     */
     public static void withdrawMoney(Bank bank){
         Scanner in  = new Scanner(System.in);
 
@@ -171,6 +205,10 @@ public class FinancialApp {
 
     }
 
+    /**
+     * Displays the options to display accounts, takes user's choice and prints out the accounts accordingly
+     * @param bank The bank that the accounts displayed belong to
+     */
     public static void displayAccountChoice(Bank bank){
         Scanner in = new Scanner(System.in);
         boolean valid = false;
@@ -189,7 +227,7 @@ public class FinancialApp {
                 case "A":
                     System.out.println("Please enter the name to search by: ");
                     String nameSearch = in.nextLine();
-                    System.out.println(Arrays.toString(bank.searchByAccountName(nameSearch))); //todo: Fix how this is outputted-if empty print out message
+                    System.out.println(Arrays.toString(bank.searchByAccountName(nameSearch)));
                     valid = true;
                     break;
                 case "b":
@@ -222,7 +260,7 @@ public class FinancialApp {
                     valid = true;
                     break;
                 default:
-                    System.out.println("Invalid response, enter a valid responce (a-b) or \"x\" to exit");
+                    System.out.println("Invalid response, enter a valid response (a-d) or \"x\" to exit");
                     break;
             }
         }
@@ -230,6 +268,10 @@ public class FinancialApp {
 
     }
 
+    /**
+     * Displays all the GIC accounts belonging to a particular person(identified by their name)
+     * @param accounts Takes in an array of accounts. Any taxable accounts are printed out
+     */
     public static void displayTax(Account[] accounts){
         for(Account a: accounts){
 

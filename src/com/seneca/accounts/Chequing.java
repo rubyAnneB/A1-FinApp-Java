@@ -59,6 +59,10 @@ public class Chequing extends Account {
         return finalBalance;
     }
 
+    /**
+     *
+     * @return Prints out the chequing account information
+     */
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getCurrencyInstance();

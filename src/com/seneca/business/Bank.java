@@ -15,9 +15,18 @@ import com.seneca.accounts.*;
  * @since 2020/01/20
  */
 public class Bank {
+    /**
+     * An arrayList containing the accounts held by the bank
+     */
     private ArrayList<Account> m_bankAccounts;
+    /**
+     * The name of the bank
+     */
     private String m_bankName;
 
+    /**
+     * Sets the default Bank name to "Seneca@York"
+     */
     public Bank(){
         this("Seneca@York");
     }
@@ -27,9 +36,17 @@ public class Bank {
         m_bankAccounts= new ArrayList<>(0);
     }
 
+    /**
+     * @return the bank's name
+     */
     public String getBankName(){return m_bankName;}
 
-    public boolean addAccount( Account newAccount ){//@return a boolean based on whether the passed object has been successfully added to the bank ArrayList
+    /**
+     * Adds an account to the bank
+     * @param newAccount the account to be added to the bank
+     * @return Whether the addition of the passed account is successful for not
+     */
+    public boolean addAccount( Account newAccount ){
 
         for(Account acc:m_bankAccounts){
             if(newAccount==null||newAccount.getAccountNumber().equals(acc.getAccountNumber())){
@@ -40,6 +57,11 @@ public class Bank {
         return m_bankAccounts.add(newAccount);
     }
 
+    /**
+     * Removes an account from the bank
+     * @param accountNumber the number of the account meant to be deleted
+     * @return the deleted account
+     */
     public Account removeAccount(String accountNumber){ //todo: Ask peter about this return type- makes better sense if it were bool no?
 
         Account m = null;
@@ -52,6 +74,11 @@ public class Bank {
         return m;
     }
 
+    /**
+     * Searches the bank's accounts for any accounts with the same balance as the passed parameter
+     * @param balance the balance that needs to be searched for in the bank
+     * @return an array of Accounts containing all the accounts with the same balance as the passed parameter
+     */
     public Account[] searchByBalance(double balance){ //@returns an ArrayList<Account> containing any accounts with the same balance as the passed parameter
 
         ArrayList<Account> matches = new ArrayList<>(0);
@@ -65,6 +92,12 @@ public class Bank {
         matchArray = matches.toArray(matchArray);
         return matchArray;
     }
+
+    /**
+     * Searches the bank for any accounts with the same account name as the passed parameter
+     * @param accountName The name that the accounts will be searched for
+     * @return An array of Accounts with account names matching the passed parameter
+     */
     public Account [ ] searchByAccountName( String accountName ){
         ArrayList<Account> match = new ArrayList<>();
 
@@ -78,6 +111,11 @@ public class Bank {
         return match.toArray(matchArray);
     }
 
+    /**
+     * Searches the bank for any accounts with the same account number as the passed parameter
+     * @param acc_Number The account number that the accounts will be searched for
+     * @return An Account with account number matching the passed parameter
+     */
     public Account searchByAccountNumber (String acc_Number){
 
         for(Account a: m_bankAccounts){
@@ -89,10 +127,19 @@ public class Bank {
         return null;
     }
 
+    /**
+     * Gets all the Accounts held by the bank
+     * @return An Account array holding all of the accounts held by the bank
+     */
     public Account [ ] getAllAccounts( ){
         Account[] a= new Account[m_bankAccounts.size()];
         return m_bankAccounts.toArray(a);
     }
+
+    /**
+     * Prints out the bank name and all the accounts held by the bank
+     * @return the bank's information and the accounts held by the bank
+     */
     public String toString(){
         NumberFormat nf = NumberFormat.getCurrencyInstance();
 

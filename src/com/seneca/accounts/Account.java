@@ -49,7 +49,7 @@ public class Account {
      */
     private void setAccountBalance (double balance){
         double n_balance = Math.max(balance, 0);
-        m_balance =  BigDecimal.valueOf(balance);
+        m_balance =  BigDecimal.valueOf(n_balance);
     }
 
 
