@@ -1,7 +1,9 @@
-package com.seneca.business;
+package test.btp400.a1;
+
 
 import com.seneca.accounts.Account;
 import com.seneca.accounts.Chequing;
+import com.seneca.business.Bank;
 import org.junit.Test;
 
 import java.math.BigDecimal;

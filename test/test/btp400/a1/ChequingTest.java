@@ -1,4 +1,5 @@
-package com.seneca.accounts;
+package test.btp400.a1;
+import com.seneca.accounts.*;
 
 import org.junit.Test;
 

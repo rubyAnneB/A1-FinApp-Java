@@ -1,4 +1,4 @@
-package com.btp400;
+package test.btp400.a1;
 
 import org.junit.Test;
 
