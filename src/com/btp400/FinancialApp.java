@@ -26,7 +26,7 @@ public class FinancialApp {
      * @param bankName The bank's name to be displayed on the menu
      */
     public static void displayMenu( String bankName ){
-        StringBuffer title = new StringBuffer("\nWelcome to").append(bankName).append(" Bank!");
+        StringBuffer title = new StringBuffer("\nWelcome to ").append(bankName).append(" Bank!");
         StringBuffer choice1 = new StringBuffer("1. Open an account.");
         StringBuffer choice2 = new StringBuffer("2. Close an account.");
         StringBuffer choice3 = new StringBuffer("3. Deposit money.");
