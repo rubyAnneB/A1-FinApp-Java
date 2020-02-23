@@ -237,6 +237,7 @@ public class FinancialApp {
 			System.out.println("c) display all accounts opened at the bank");
 			System.out.println("d) display a specific account");
 			System.out.println("x) Return to main menu");
+			System.out.print(">");
 			String option = in.nextLine();
 
 			switch (option) {
@@ -293,6 +294,7 @@ public class FinancialApp {
 	 */
 	public static void displayTax(Account[] accounts) {
 		Scanner in = new Scanner(System.in);
+		System.out.println("Which person would you like a tax statement for?");
 		System.out.print("Name: ");
 		String n = in.nextLine();
 		boolean start = false;
