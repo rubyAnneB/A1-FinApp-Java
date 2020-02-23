@@ -16,6 +16,12 @@ public class Account {
             m_num;
     private BigDecimal m_balance;
 
+    /**
+     *
+     * @param name Name of person who owns the account
+     * @param num the account number
+     * @param balance the starting balance of the account
+     */
     public Account(String name, String num, double balance) {
         setAccountBalance(balance);
         setAccountNumber(num);
@@ -23,6 +29,9 @@ public class Account {
 
     }
 
+    /**
+     * This default constuctor- sets the default values of the account
+     */
     public Account(){this("","",0);}
 
 
@@ -62,6 +71,10 @@ public class Account {
         return m_name;
     }
 
+    /**
+     * Returns the first name
+     * @return first name, the name before the first encountered space
+     */
     public String getFirstName(){
         String []nameSplit = m_name.split(" ");
         return nameSplit[0];
@@ -70,7 +83,7 @@ public class Account {
 
     /**
      *
-     * @return all the tokens after the first space using " " as delimite
+     * @return all the tokens after the first space using " " as delimiter
      */
     public String getLastName(){
 
@@ -89,7 +102,9 @@ public class Account {
         return names.trim();
     }
 
-    //@return String returns the account number
+    /**
+     * @return String returns the account number
+     */
     public String getAccountNumber(){
         return m_num;
     }
@@ -110,9 +125,6 @@ public class Account {
         return str.toString();
 
     }
-
-    //Lab2
-
 
     @Override
     public int hashCode() {//ask more about this
@@ -143,13 +155,12 @@ public class Account {
     }
 
     /**
-     *
+     * Withdraws amount from the account
      * @param amount the amount the user would like to withdraw from the account. Cannot be negative
      * @return the result of the attempting withdraw. If passed amount is negative, will return a false
      */
     public boolean withdraw (double amount){
-        //keep in mind that the balance must never become negative
-        //Maybe create a custom exception for when balance turns negative?
+
         boolean result = false;
 
         if(amount>0){
@@ -166,7 +177,6 @@ public class Account {
     }
 
     /**
-     *
      * @param amount the amount the user would like to deposit in to the account. Cannot be negative
      */
     public void deposit(double amount){

@@ -8,6 +8,9 @@ import com.seneca.business.*;
 /**
  * This class prints out the menu and outputs the messages in accordance to the
  * user's input
+ * @author Ruby Anne Bautista, Daniel Derich
+ * @since 202/02/22
+ * @version 1.0
  */
 public class FinancialApp {
 
@@ -19,6 +22,8 @@ public class FinancialApp {
 		bank.addAccount(new Chequing("Mary Ryan", "5678C", 678.90, 0.12, 3));
 		bank.addAccount(new GIC("John Doe", "9999G", 6000, 2, .0150));
 		bank.addAccount(new GIC("Mary Ryan", "888G", 15000, 4, .0250));
+		bank.addAccount(new GIC("Mary Ryan", "778G", 12222, 4, .0250));
+
 	}
 
 	/**
@@ -27,22 +32,15 @@ public class FinancialApp {
 	 */
 	public static void displayMenu(String bankName) {
 		StringBuffer title = new StringBuffer("\nWelcome to ").append(bankName).append(" Bank!");
-		StringBuffer choice1 = new StringBuffer("1. Open an account.");
-		StringBuffer choice2 = new StringBuffer("2. Close an account.");
-		StringBuffer choice3 = new StringBuffer("3. Deposit money.");
-		StringBuffer choice4 = new StringBuffer("4. Withdraw money.");
-		StringBuffer choice5 = new StringBuffer("5. Display accounts.");
-		StringBuffer choice6 = new StringBuffer("6. Display a tax statement.");
-		StringBuffer choice7 = new StringBuffer("7. Exit.");
 
 		System.out.println(title);
-		System.out.println(choice1);
-		System.out.println(choice2);
-		System.out.println(choice3);
-		System.out.println(choice4);
-		System.out.println(choice5);
-		System.out.println(choice6);
-		System.out.println(choice7);
+		System.out.println("1. Open an account.");
+		System.out.println("2. Close an account.");
+		System.out.println("3. Deposit money.");
+		System.out.println("4. Withdraw money.");
+		System.out.println("5. Display accounts.");
+		System.out.println("6. Display a tax statement.");
+		System.out.println("7. Exit.");
 	}
 
 	/**
@@ -80,7 +78,7 @@ public class FinancialApp {
 			System.out.print("Please enter the account type(CHQ/GIC)> ");
 			String acc_type = in.nextLine();
 
-			System.out.println("Please enter account information at one line.\n");
+			System.out.println("Please enter account information in one line.\n");
 
 			if (acc_type.equals("CHQ") || acc_type.equals("chq")) {
 				System.out.println(
@@ -135,9 +133,9 @@ public class FinancialApp {
 
 		System.out.println("Please enter the Account Number: ");
 		String delAccNum = in.nextLine();
-		System.out.println("Confirm delete of account with the number: " + delAccNum + " (Y/N)"); // do I have to use
-																									// StringBuffer
-																									// here?
+		StringBuffer confirm = new StringBuffer("Confirm delete of account with the number:").append(delAccNum).append(" (Y/N)");
+		System.out.println(confirm);
+
 		String res = in.nextLine();
 
 		boolean valid_res = false;
@@ -186,6 +184,7 @@ public class FinancialApp {
 			System.out.println("Please enter the amount you would like to deposit:");
 			double depositMoney = in.nextDouble();
 			depAcc.deposit(depositMoney);
+			System.out.println("Deposit Successful");
 
 		} else {
 			System.out.println("Error account not found.");
@@ -210,7 +209,7 @@ public class FinancialApp {
 			double withdrawAmount = in.nextDouble();
 
 			if (depAcc.withdraw(withdrawAmount)) {
-				System.out.println("Withdraw successfull");
+				System.out.println("Withdraw successful");
 			} else {
 				System.out.println("Withdraw failed");
 			}
@@ -302,18 +301,14 @@ public class FinancialApp {
 		for (Account a : accounts) {
 
 			if (a instanceof Taxable && a.getFullName().equals(n)) {
-				if (start == false) {
+				if (!start) {
 					System.out.println("Tax rate: " + ((int) (((Taxable) a).tax_rate * 100.00)) + "%\n");
-					;
 
 					start = true;
 				}
 				System.out.println("[" + count++ + "]");
 				System.out.print(((GIC) a).getTax());
 
-				// todo:Formatting for this is all wrong:( function doesn't print int the same
-				// way
-				// specs for this menu choice !compatible with those for GIC
 			}
 		}
 	}

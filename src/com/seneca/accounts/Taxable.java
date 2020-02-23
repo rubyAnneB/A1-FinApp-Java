@@ -13,9 +13,9 @@ public interface Taxable {
     /**
      * This is the tax rate defined for all taxable accounts
      */
-    public static final double tax_rate = .13;
+    double tax_rate = .15;
 
-    public void calculateTax();
-    public double getTaxAmount();
-    public String createTaxStatement();
+    void calculateTax();
+    double getTaxAmount();
+    String createTaxStatement();
 }

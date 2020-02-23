@@ -60,7 +60,6 @@ public class Chequing extends Account {
     }
 
     /**
-     *
      * @return Prints out the chequing account information
      */
     @Override
@@ -72,7 +71,7 @@ public class Chequing extends Account {
                 .append("\nAccount Type        : CHQ")
                 .append("\nService Charge      : ").append(nf.format(m_serv_charge))
                 .append("\nTotal Charges       : ").append(nf.format(m_total_charges))
-                .append("\nList of Transactions: ").append(transationArrayString())
+                .append("\nList of Transactions: ").append(transactionArrayString())
                 .append("\nFinal Balance       : ").append(nf.format(getAccountBalance()));
 
         return str.toString();
@@ -83,7 +82,7 @@ public class Chequing extends Account {
      * @return Formats the array of transactions into a
      * String to be printed out by the toString() method
      */
-    private String transationArrayString(){
+    private String transactionArrayString(){
 
         String tranString= "";
 
@@ -94,9 +93,15 @@ public class Chequing extends Account {
         return tranString;
 
     }
+
+    /**
+     * Checks if the passed object has the same service charge, max transaction limit and transaction history
+     * @param obj takes an object (obj) and checks if the object is logically the same as the current object
+     * @return false if equal, true if equal
+     */
     public boolean equals(Object obj) {
 
-        if((obj == null) || (obj.getClass() != this.getClass())){//obj is not of same class there cannot be same object
+        if((obj == null) || (obj.getClass() != this.getClass())){
             return false;
         }
 
