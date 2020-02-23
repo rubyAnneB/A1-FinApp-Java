@@ -32,7 +32,11 @@ public class Bank {
     }
 
     public Bank(String name){
-        m_bankName=name;
+       if (name == null) {
+           m_bankName = "Seneca@York";
+       } else {
+           m_bankName = name;
+       }
         m_bankAccounts= new ArrayList<>(0);
     }
 
