@@ -11,10 +11,10 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public class GIC extends Account implements Taxable {
-	private int m_period;
-	private BigDecimal m_rate;
-	private BigDecimal taxAmount = BigDecimal.valueOf(0.00);
-	private BigDecimal intIncome = BigDecimal.valueOf(0.00); 
+	private int m_period; // period of investment in years
+	private BigDecimal m_rate; // annual interest rate
+	private BigDecimal taxAmount = BigDecimal.valueOf(0.00); // total amount of taxes on balance at maturity
+	private BigDecimal intIncome = BigDecimal.valueOf(0.00); // interest on starting balance using formula
 
 	/**
 	 * constructs empty GIC with default values
@@ -77,14 +77,15 @@ public class GIC extends Account implements Taxable {
 		rt.setMinimumFractionDigits(2);
 		rt.setMaximumFractionDigits(2);
 		StringBuffer result = new StringBuffer();
-		BigDecimal nbal = getAccountBalance(); // required to run so that intIncome is calculated before printed to console
-		
+		BigDecimal nbal = getAccountBalance(); // required to run so that intIncome is calculated before printed to
+												// console
+
 		result.append(super.toString());
 		result.append("\nAccount Type               : GIC\n").append("Annual Interest Rate       : ")
 				.append(rt.format(m_rate.doubleValue() * 100.00));
 		result.append("%\nPeriod of Investment       : ").append(m_period)
 				.append(" year(s)\n" + "Interest Income at Maturity: ");
-		result.append(nf.format(intIncome.doubleValue())).append("\nBalance at Maturity        : ");		
+		result.append(nf.format(intIncome.doubleValue())).append("\nBalance at Maturity        : ");
 		result.append(nf.format(nbal.doubleValue())).append("\n");
 		return result.toString();
 	}
@@ -126,8 +127,10 @@ public class GIC extends Account implements Taxable {
 	public String createTaxStatement() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuffer str = new StringBuffer();
-		str.append("Tax rate       : ").append((int) (tax_rate * 100.00)).append("%\nAccount Number : ").append(this.getAccountNumber());
-		str.append("\nInterest Income: ").append(nf.format(this.getAccountBalance().doubleValue())).append("\nAmount of tax  : ");
+		str.append("Tax rate       : ").append((int) (tax_rate * 100.00)).append("%\nAccount Number : ")
+				.append(this.getAccountNumber());
+		str.append("\nInterest Income: ").append(nf.format(this.getAccountBalance().doubleValue()))
+				.append("\nAmount of tax  : ");
 		str.append(nf.format(getTaxAmount())).append("\n");
 		return str.toString();
 	}
@@ -141,7 +144,9 @@ public class GIC extends Account implements Taxable {
 		return false;
 	}
 
-	/** getAccountBalance()
+	/**
+	 * getAccountBalance()
+	 * 
 	 * @return BigDecimal of Balance at Maturity Formula: Current/Starting Balance x
 	 *         ( 1 + r ) ^ t r = annual interest rate t = number of years (i.e.
 	 *         period of investment)
@@ -155,16 +160,20 @@ public class GIC extends Account implements Taxable {
 		this.intIncome = mature.subtract(start);
 		return mature;
 	}
+
 	/**
+	 * used for FinancialApp: public static void displayTax(Account[] accounts)
 	 * 
-	 * @return str.toString() - String that holds formatted information about a Taxable GIC Account
+	 * @return str.toString() - String that holds formatted information about a
+	 *         Taxable GIC Account
 	 */
 	public String getTax() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuffer str = new StringBuffer();
-		//str.append("Tax rate: ").append((int) (tax_rate * 100.00)).append("%\n");
+		// str.append("Tax rate: ").append((int) (tax_rate * 100.00)).append("%\n");
 		str.append("Account Number : ").append(this.getAccountNumber());
-		str.append("\nInterest Income: ").append(nf.format(this.getAccountBalance().doubleValue())).append("\nAmount of tax  : ");
+		str.append("\nInterest Income: ").append(nf.format(this.getAccountBalance().doubleValue()))
+				.append("\nAmount of tax  : ");
 		str.append(nf.format(getTaxAmount())).append("\n");
 		return str.toString();
 	}
