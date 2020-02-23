@@ -1,18 +1,28 @@
-package test.btp400.a1;
-
-import com.seneca.accounts.*;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 /**
  * @author Ruby Anne Bautista
  * @since 2020/02/22
  * @version 1.0
  */
-public class GICTest {
+package test.btp400.a1;
 
-    @Test
+import com.seneca.accounts.*;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+
+
+@RunWith(Suite.class)
+@SuiteClasses({})
+
+public class GICTest {
+	@Test
 	public void testEmpty() {
 		GIC empty = new GIC();
         System.out.println(empty);
@@ -29,9 +39,9 @@ public class GICTest {
 
 	@Test
 	void testDeposit() {	
-		GIC dep = new GIC("Daniel Derich", "TD001", 500.55, 2, 0.025);
+		GIC dep = new GIC("Ruby Anne", "TD001", 500.55, 2, 0.025);
 		dep.deposit(199.99);
-		GIC dep2 = new GIC("Daniel Derich", "TD001", 500.55, 2, 0.025);
+		GIC dep2 = new GIC("Ruby Anne", "TD001", 500.55, 2, 0.025);
 		assertEquals(dep,dep2);
 	}
     
@@ -49,5 +59,24 @@ public class GICTest {
         double balance1 = c.getAccountBalance().doubleValue();
         assertEquals(1030.22,balance,2);
         assertEquals(2088.96,balance1,2);
+    }
+    
+    
+    @Test
+    public void interestIncomeCheck1() {
+    	GIC gic1 = new GIC("Daniel Derich", "TD001", 500.00, 2, 0.020);
+    	System.out.println(gic1);
+    	double interest = (500.00*Math.pow((1+0.020), 2)) - 500.00;
+    	double inter = gic1.getAccountBalance().doubleValue() - 500.00;
+    	assertEquals(interest, inter, 2);   	
+    }
+    
+    @Test
+    public void interestIncomeCheck2() {
+    	GIC gic1 = new GIC("Daniel Brian", "TD002", 1025.00, 3, 0.055);
+    	System.out.println(gic1);
+    	double interest = (1025.00*Math.pow((1+0.055), 3)) - 1025.00;
+    	double inter = gic1.getAccountBalance().doubleValue() - 1025.00;
+    	assertEquals(interest, inter, 2);   	
     }
 }
