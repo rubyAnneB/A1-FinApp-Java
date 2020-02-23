@@ -1,3 +1,10 @@
+/*
+ * Assignment 1
+ * @author Daniel Derich
+ * @version 1.0
+ * @since 2020-02-22
+ * */
+
 package test.btp400.a1;
 import com.seneca.accounts.Account;
 import org.junit.Test;
