@@ -3,7 +3,7 @@ package com.seneca.accounts;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Arrays;
-//todo: Do the javadoc comments and other documentation
+
 
 /**
  * @author Ruby Anne Bautista

@@ -167,7 +167,7 @@ public class Account {
 
             BigDecimal new_balance = ( m_balance.subtract(BigDecimal.valueOf(amount))); //Is is valid? Ask peter
 
-            if(new_balance.compareTo(BigDecimal.ZERO)==1 ){//returns 1 if greater than passed param
+            if(new_balance.compareTo(BigDecimal.ZERO) > 0){//returns 1 if greater than passed param
                 m_balance = new_balance;
                 result = true;
             }
