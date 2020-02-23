@@ -13,12 +13,28 @@ import static org.junit.Assert.*;
 public class GICTest {
 
     @Test
-    public void DepositGICTest(){
-        GIC depositG = new GIC("Fname Lname","1234G",100,4,0.10);
-        GIC depositG1 = new GIC("Fname Lname","1234G",100,4,0.10);
-        depositG.deposit(100);
-        assertEquals(depositG,depositG1);
-    }
+	public void testEmpty() {
+		GIC empty = new GIC();
+        System.out.println(empty);
+		assertEquals(empty, new GIC("","",0.00,0,0.00));
+	}
+	
+	@Test
+	public void testNull() {
+		GIC nullGIC = new GIC (null, null, -1000.55, -1, -0.03);
+		System.out.println(nullGIC);
+		System.out.println(new GIC());
+		assertEquals(nullGIC, new GIC());
+	}
+
+	@Test
+	void testDeposit() {	
+		GIC dep = new GIC("Daniel Derich", "TD001", 500.55, 2, 0.025);
+		dep.deposit(199.99);
+		GIC dep2 = new GIC("Daniel Derich", "TD001", 500.55, 2, 0.025);
+		assertEquals(dep,dep2);
+	}
+    
     @Test
     public void WithdrawGICTest(){
         GIC withdrawG = new GIC("Fname Lname","1234G",100,4,0.10);
