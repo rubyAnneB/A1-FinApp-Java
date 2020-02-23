@@ -13,8 +13,8 @@ import java.text.NumberFormat;
 public class GIC extends Account implements Taxable {
 	private int m_period;
 	private BigDecimal m_rate;
-	private BigDecimal taxAmount = new BigDecimal("0.00");
-	private BigDecimal intIncome = new BigDecimal("0.00");
+	private BigDecimal taxAmount = BigDecimal.valueOf(0.00);
+	private BigDecimal intIncome = BigDecimal.valueOf(0.00); 
 
 	/**
 	 * constructs empty GIC with default values
@@ -35,21 +35,29 @@ public class GIC extends Account implements Taxable {
 	 */
 	public GIC(String name, String acctnum, double principal, int period, double rate) {
 		super(name, acctnum, principal);
-		m_period = period;
-		m_rate = BigDecimal.valueOf(rate);
+		if (period <= 0) {
+			m_period = 1;
+		} else {
+			m_period = period;
+		}
+		if (rate <= 0.00) {
+			m_rate = BigDecimal.valueOf(0.0125);
+		} else {
+			m_rate = BigDecimal.valueOf(rate);
+		}
 	}
 
 	/**
 	 * This is an override of the equals() method
 	 * 
-	 * @param objG : Object - checked by if instanceof
+	 * @param obj : Object - checked by if instanceof
 	 * @return status : boolean returns true if all attributes are equal
 	 */
 	public boolean equals(Object objG) {
 		boolean status = false;
 		if (objG instanceof GIC) {
 			GIC g2 = (GIC) objG;
-			if (super.equals(g2) && this.m_period == g2.m_period && this.m_rate.equals(g2.m_rate)) {
+			if (super.equals(g2) == true && this.m_period == g2.m_period && this.m_rate.equals(g2.m_rate)) {
 				status = true;
 			}
 
@@ -64,18 +72,20 @@ public class GIC extends Account implements Taxable {
 	 *         format
 	 */
 	public String toString() {
-		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		NumberFormat rt = NumberFormat.getNumberInstance();
+		NumberFormat nf = NumberFormat.getCurrencyInstance(); // formats intIncome & nbal
+		NumberFormat rt = NumberFormat.getNumberInstance(); // formats Period of Investment
 		rt.setMinimumFractionDigits(2);
 		rt.setMaximumFractionDigits(2);
 		StringBuffer result = new StringBuffer();
+		BigDecimal nbal = getAccountBalance(); // required to run so that intIncome is calculated before printed to console
+		
 		result.append(super.toString());
 		result.append("\nAccount Type               : GIC\n").append("Annual Interest Rate       : ")
-				.append(nf.format(m_rate.doubleValue() * 100.00));
+				.append(rt.format(m_rate.doubleValue() * 100.00));
 		result.append("%\nPeriod of Investment       : ").append(m_period)
 				.append(" year(s)\n" + "Interest Income at Maturity: ");
-		result.append(nf.format(intIncome.doubleValue())).append("\nBalance at Maturity        : ");
-		result.append(nf.format(this.getAccountBalance().doubleValue())).append("\n");
+		result.append(nf.format(intIncome.doubleValue())).append("\nBalance at Maturity        : ");		
+		result.append(nf.format(nbal.doubleValue())).append("\n");
 		return result.toString();
 	}
 
@@ -139,8 +149,9 @@ public class GIC extends Account implements Taxable {
 	@Override
 	public BigDecimal getAccountBalance() {
 		BigDecimal start = super.getAccountBalance();
-		BigDecimal mature;
-		mature = start.multiply((m_rate.add(BigDecimal.valueOf(1.00))).pow(m_period));
+		BigDecimal mature = BigDecimal.valueOf(0.00);
+		BigDecimal formula = m_rate.add(BigDecimal.valueOf(1.00)).pow(m_period);
+		mature = start.multiply(formula);
 		this.intIncome = mature.subtract(start);
 		return mature;
 	}
