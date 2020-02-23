@@ -28,7 +28,10 @@ public class GICTest {
     @Test
     public void finalBalanceTest(){
         GIC b = new GIC("Fname Lname","1234G",1000,2,0.015);
+        GIC c = new GIC("Fname1 Lname2","1234G",2000,2,0.022);
         double balance = b.getAccountBalance().doubleValue();
+        double balance1 = c.getAccountBalance().doubleValue();
         assertEquals(1030.22,balance,2);
+        assertEquals(2088.96,balance1,2);
     }
 }
