@@ -72,7 +72,7 @@ public class Chequing extends Account {
                 .append("\nService Charge      : ").append(nf.format(m_serv_charge))
                 .append("\nTotal Charges       : ").append(nf.format(m_total_charges))
                 .append("\nList of Transactions: ").append(transactionArrayString())
-                .append("\nFinal Balance       : ").append(nf.format(getAccountBalance())).append("\n"));
+                .append("\nFinal Balance       : ").append(nf.format(getAccountBalance())).append("\n");
 
         return str.toString();
 
