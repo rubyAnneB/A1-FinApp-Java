@@ -294,8 +294,8 @@ public class FinancialApp {
 	 */
 	public static void displayTax(Account[] accounts) {
 		Scanner in = new Scanner(System.in);
-		System.out.println("Which person would you like a tax statement for?");
-		System.out.print("Name: ");
+		System.out.print("Which person would you like a tax statement for? ");
+		
 		String n = in.nextLine();
 		boolean start = false;
 		int count = 1;
@@ -304,12 +304,15 @@ public class FinancialApp {
 
 			if (a instanceof Taxable && a.getFullName().equals(n)) {
 				if (!start) {
-					System.out.println("Tax rate: " + ((int) (((Taxable) a).tax_rate * 100.00)) + "%\n");
-
+					System.out.println("Tax rate: " + ((int) (((Taxable) a).tax_rate * 100.00)) + "%");
+					System.out.println("Name: " + a.getLastName() + ", " + a.getFirstName() + "\n");
 					start = true;
 				}
-				System.out.println("[" + count++ + "]");
-				System.out.print(((GIC) a).getTax());
+				if (a instanceof GIC) {
+					System.out.println("[" + count++ + "]");
+					System.out.println(((GIC) a).getTax());
+				}
+				
 
 			}
 		}
