@@ -50,14 +50,14 @@ public class GIC extends Account implements Taxable {
 	/**
 	 * This is an override of the equals() method
 	 * 
-	 * @param obj : Object - checked by if instanceof
+	 * @param objG : Object - checked by if instanceof
 	 * @return status : boolean returns true if all attributes are equal
 	 */
 	public boolean equals(Object objG) {
 		boolean status = false;
 		if (objG instanceof GIC) {
 			GIC g2 = (GIC) objG;
-			if (super.equals(g2) == true && this.m_period == g2.m_period && this.m_rate.equals(g2.m_rate)) {
+			if (super.equals(g2) && this.m_period == g2.m_period && this.m_rate.equals(g2.m_rate)) {
 				status = true;
 			}
 
@@ -104,14 +104,13 @@ public class GIC extends Account implements Taxable {
 	 * 
 	 */
 	public void calculateTax() {
-		BigDecimal amount = this.getAccountBalance().multiply(BigDecimal.valueOf(tax_rate));
-		taxAmount = amount;
+		taxAmount = this.getAccountBalance().multiply(BigDecimal.valueOf(tax_rate));
 	}
 
 	/**
 	 * Interface method
 	 * 
-	 * @return the total tax amount, priuvate variable getters method
+	 * @return the total tax amount, private variable getters method
 	 */
 	public double getTaxAmount() {
 		this.calculateTax();

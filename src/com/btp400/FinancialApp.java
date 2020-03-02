@@ -99,7 +99,6 @@ public class FinancialApp {
 				}
 
 			} else if (acc_type.equals("GIC") || acc_type.equals("gic")) {
-				System.out.println("This is GIC account type input.");
 				System.out.println(
 						"Format: Name; Account Number; Starting Balance; Period of Investment in year(s); Interest Rate (15.5% would be 15.5)");
 				System.out.println("Example: John M. Doe;A1234;1000.00; 1; 15.5");
